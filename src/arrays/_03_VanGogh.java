@@ -59,16 +59,21 @@ public class _03_VanGogh extends PApplet {
     
     void initializePaintings() {
        PImage arr[] = new PImage[4];
-       arr[1] = loadImage("starryNight.jpg");
-       arr[2] = loadImage("strawHatPortrait.jpg");
-       arr[3] = loadImage("wheatField.jpg");
-       arr[4] = loadImage("PainterOnRoad.jpg");
+       arr[0] = loadImage("starryNight.jpg");
+       arr[1] = loadImage("strawHatPortrait.jpg");
+       arr[2] = loadImage("wheatField.jpg");
+       arr[3] = loadImage("painterOnRoad.jpg");
        index = 0;
        brush.setNewPainting(arr[index]);
     }
     
     void selectNextPainting() {
-        
+       index++;
+       if(index > 3) {
+    	   index = 0;
+       }
+       
+       brush.setNewPainting(arr[index]);
     }
 
     @Override
@@ -100,9 +105,8 @@ public class _03_VanGogh extends PApplet {
             image(canvas, 0, 0);
             initializeCanvas = false;
         }
-
-        brush.update();
         brush.draw();
+        brush.update();
     }
 
     @Override
@@ -113,7 +117,7 @@ public class _03_VanGogh extends PApplet {
             } else if (key == 32) {
                 // SPACE key pressed--go to next painting
                 selectNextPainting();
-
+                
                 //canvas.resize(width, height);
                 initializeCanvas = true;
             }
